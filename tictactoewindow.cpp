@@ -109,7 +109,6 @@ void TicTacToeWindow::on_pushButton_clicked()
 {
     int col = ui->colInput->text().toInt();
     int row = ui->rowInput->text().toInt();
-    tttModel->put(row, col);
     updateScreen();
 }
 

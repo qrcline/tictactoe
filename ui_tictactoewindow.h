@@ -132,7 +132,7 @@ public:
         TicTacToeWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(TicTacToeWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 710, 21));
+        menuBar->setGeometry(QRect(0, 0, 710, 20));
         TicTacToeWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(TicTacToeWindow);
         mainToolBar->setObjectName(QString::fromUtf8("mainToolBar"));
@@ -163,6 +163,8 @@ public:
         groupBox_2->setTitle(QApplication::translate("TicTacToeWindow", "Text-Based TicTacToe", nullptr));
         boardLabel->setText(QApplication::translate("TicTacToeWindow", "<html><head/><body><p>---<br/>---<br/>---</p></body></html>", nullptr));
         TBStatusLabel->setText(QApplication::translate("TicTacToeWindow", "TextLabel", nullptr));
+        rowInput->setInputMask(QApplication::translate("TicTacToeWindow", "9", nullptr));
+        colInput->setInputMask(QString());
         label->setText(QApplication::translate("TicTacToeWindow", "Row (0-2)", nullptr));
         label_2->setText(QApplication::translate("TicTacToeWindow", "Col (0-2)", nullptr));
         pushButton->setText(QApplication::translate("TicTacToeWindow", "Put", nullptr));
