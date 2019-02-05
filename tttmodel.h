@@ -20,6 +20,7 @@ private:
     // finish implementation of the functions above
     QString boardStatus;
     QString player="x";
+    int playCount=1;
     static const int ASIZE=3;
     QChar array[ASIZE][ASIZE]={{'-','-','-'},{'-','-','-'},{'-','-','-'}};
     QString arrayToString(QChar array[], int lenght);

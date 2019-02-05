@@ -40,10 +40,15 @@ QString TTTModel::getCurrentBoard() // something like "---XOXX--"
 
 QString TTTModel::getWhosTurn() // "X" or "O" or if somebody already won, return anything
 {
-   if(player=="X")
+   /*if(player=="X")
        player="O";
    else
-       player="X";
+      player="X";
+    */
+    player="O";
+    if(playCount%2==0)
+        player="X";
+    playCount++;
    return player;
 }
 
@@ -70,7 +75,7 @@ bool TTTModel::hasSomeoneWon() // return if somebody has won
         {
              return true;
         }
-        if(tempRowMatch[0]==tempRowMatch[1]==tempColMatch[2])
+        if(arrayToString(tempRowMatch,ASIZE)=="XXX" || arrayToString(tempRowMatch,ASIZE)=="OOO")
         {
              return true;
         }
@@ -85,7 +90,7 @@ QString TTTModel::arrayToString(QChar array[],int lenght)
     QString tempString="";
     for(int i=0;i<lenght;i++)
     {
-         tempString=array[i];
+         tempString= tempString+array[i];
     }
     return tempString;
 }
@@ -105,7 +110,12 @@ QString TTTModel::arrayToString(char array[][ASIZE])
 
 QString TTTModel::whosWinner() // return "X" or "O" if there's any winner. return anything if there's no winner yet
 {
-    return "";
+    QString playerTemp=player;
+    if(playerTemp=="X")
+        playerTemp="O";
+    else
+        playerTemp="X";
+    return playerTemp;
 
 }
 
