@@ -48,6 +48,7 @@ void TicTacToeWindow::updateScreen()
         ui->IBStatusLabel->setText(msg);
         ui->TBStatusLabel->setText(msg);
     }
+
 }
 
 void TicTacToeWindow::on_board00_clicked()

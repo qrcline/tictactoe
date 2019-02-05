@@ -19,7 +19,12 @@ void TTTModel::reset()
 
 void TTTModel::put(int row, int col)
 {
-    array[row][col]= getWhosTurn().at(0);
+
+    if(!hasSomeoneWon() &&row<ASIZE&&row>=0&&col<ASIZE&&col>=0&&array[row][col]=="-")
+    {
+        array[row][col]= getWhosTurn().at(0);
+        nextPlayer();
+    }
 
 }
 
@@ -38,17 +43,19 @@ QString TTTModel::getCurrentBoard() // something like "---XOXX--"
 
 }
 
-QString TTTModel::getWhosTurn() // "X" or "O" or if somebody already won, return anything
+void TTTModel::nextPlayer()
 {
-   /*if(player=="X")
-       player="O";
-   else
-      player="X";
-    */
     player="O";
     if(playCount%2==0)
         player="X";
     playCount++;
+    std::cout<<"Current player: "<<player.toStdString()<<std::endl;
+}
+
+QString TTTModel::getWhosTurn() // "X" or "O" or if somebody already won, return anything
+{
+   if(hasSomeoneWon())
+        return "W";
    return player;
 }
 
@@ -58,6 +65,8 @@ bool TTTModel::hasSomeoneWon() // return if somebody has won
 
     QChar tempRowMatch[ASIZE];
     QChar tempColMatch[ASIZE];
+    QChar tempCrossLeft[ASIZE];
+    QChar tempCrossRight[ASIZE];
     for(int i=0; i<ASIZE; i++)
     {
         for (int j=0;j<ASIZE;j++)
@@ -67,19 +76,17 @@ bool TTTModel::hasSomeoneWon() // return if somebody has won
             std::cout<<"Execution"<<j<<std::endl;
         }
 
-
-          std::cout<<arrayToString(tempColMatch,ASIZE).toStdString()<<std::endl;
-
-
+        tempCrossLeft[i]=array[i][i];
+         tempCrossRight[i]=array[ASIZE-1-i][i];
+     //std::cout<<arrayToString(tempColMatch,ASIZE).toStdString()<<std::endl;
         if(arrayToString(tempColMatch,ASIZE)=="XXX" || arrayToString(tempColMatch,ASIZE)=="OOO")
-        {
              return true;
-        }
         if(arrayToString(tempRowMatch,ASIZE)=="XXX" || arrayToString(tempRowMatch,ASIZE)=="OOO")
-        {
              return true;
-        }
-
+        if(arrayToString(tempCrossLeft,ASIZE)=="XXX" || arrayToString(tempCrossLeft,ASIZE)=="OOO")
+             return true;
+        if(arrayToString(tempCrossRight,ASIZE)=="XXX" || arrayToString(tempCrossRight,ASIZE)=="OOO")
+             return true;
     }
     std::cout<<"No Winner"<<std::endl;
         return false;
@@ -111,11 +118,16 @@ QString TTTModel::arrayToString(char array[][ASIZE])
 QString TTTModel::whosWinner() // return "X" or "O" if there's any winner. return anything if there's no winner yet
 {
     QString playerTemp=player;
-    if(playerTemp=="X")
-        playerTemp="O";
-    else
-        playerTemp="X";
-    return playerTemp;
+    if(hasSomeoneWon())
+    {
+        if(playerTemp=="X")
+            playerTemp="O";
+        else
+            playerTemp="X";
+
+        return playerTemp;
+    }
+    return "N";
 
 }
 

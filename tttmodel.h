@@ -14,12 +14,13 @@ public:
     QString getWhosTurn(); // "X" or "O" or if somebody already won, return anything
     bool hasSomeoneWon(); // return if somebody has won
     QString whosWinner(); // return "X" or "O" if there's any winner. return anything if there's no winner yet
+    void nextPlayer();
 
 private:
     // my own data structure and boolean variable and checking logics if the game has ended?
     // finish implementation of the functions above
     QString boardStatus;
-    QString player="x";
+    QString player="X";
     int playCount=1;
     static const int ASIZE=3;
     QChar array[ASIZE][ASIZE]={{'-','-','-'},{'-','-','-'},{'-','-','-'}};
