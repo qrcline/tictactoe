@@ -19,6 +19,11 @@ private:
     // my own data structure and boolean variable and checking logics if the game has ended?
     // finish implementation of the functions above
     QString boardStatus;
+    QString player="x";
+    static const int ASIZE=3;
+    QChar array[ASIZE][ASIZE]={{'-','-','-'},{'-','-','-'},{'-','-','-'}};
+    QString arrayToString(QChar array[], int lenght);
+    QString arrayToString(char array[][ASIZE]);
 };
 
 #endif // TTTMODEL_H
